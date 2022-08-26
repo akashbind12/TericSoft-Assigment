@@ -19,7 +19,7 @@ export const EmployeeTable = ({getdata,employee}) => {
   }, [])
   
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:8080/employee/${id}`)
+    axios.delete(`https://tericsoft-backend.herokuapp.com/employee/${id}`)
     .then(function (response) {
         console.log("deleted:", response.data);
         getdata()

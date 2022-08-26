@@ -60,7 +60,7 @@ BootstrapDialogTitle.propTypes = {
 
 
 
-// -------------------------components-------------------------
+// -------------------------component-------------------------
 
 export default function CustomizedDialogs({prop, getdata}) {
     const [open, setOpen] = React.useState(false);
@@ -94,7 +94,7 @@ export default function CustomizedDialogs({prop, getdata}) {
 
     const  Addemployee = () => {
       if(details.name && details.email && details.phone && details.dob && details.gender && details.hobbies){
-        axios.post('http://localhost:8080/employee', details)
+        axios.post('https://tericsoft-backend.herokuapp.com/employee', details)
         .then(function (response) {
             console.log("post:", response.data);
             getdata()

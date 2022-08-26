@@ -9,7 +9,7 @@ function App() {
   const [employee, setEmployee] = useState([])
 
   const getdata = () => {
-    axios.get('http://localhost:8080/employee')
+    axios.get('https://tericsoft-backend.herokuapp.com/employee')
     .then(function (response) {
         console.log("get:", response.data);
         setEmployee(response.data)

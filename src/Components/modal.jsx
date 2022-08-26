@@ -16,7 +16,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import MultipleSelectCheckmarks from "./selectbar"
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import axios from "axios"
 
 
@@ -62,7 +62,7 @@ BootstrapDialogTitle.propTypes = {
 
 // -------------------------component-------------------------
 
-export default function CustomizedDialogs({prop, getdata}) {
+export default function CustomizedDialogs({ prop, getdata, id}) {
     const [open, setOpen] = React.useState(false);
   
     const [details, sedetails] = useState({
@@ -89,8 +89,7 @@ export default function CustomizedDialogs({prop, getdata}) {
         })
         console.log(details)
    }
-
-
+   
 
     const  Addemployee = () => {
       if(details.name && details.email && details.phone && details.dob && details.gender && details.hobbies){
@@ -98,6 +97,7 @@ export default function CustomizedDialogs({prop, getdata}) {
         .then(function (response) {
             console.log("post:", response.data);
             getdata()
+            alert("added successfully")
         })
         .catch(function (error) {
           console.log(error)
@@ -106,6 +106,24 @@ export default function CustomizedDialogs({prop, getdata}) {
           alert("Fill all the details")
       }
    }
+  
+    const Editemployee = (id) => {
+        console.log(id)
+        if(details.name && details.email && details.phone && details.dob && details.gender && details.hobbies){
+            axios.put(`https://tericsoft-backend.herokuapp.com/employee/${id}`, details)
+            .then(function (response) {
+                console.log("update:", response.data);
+                getdata()
+                alert("updated successfully")
+            })
+            .catch(function (error) {
+              console.log(error)
+            });
+          } else {
+              alert("Fill all the details")
+          }
+    }
+    
 
   return (
     <div>
@@ -148,13 +166,21 @@ export default function CustomizedDialogs({prop, getdata}) {
 
             </Box>         
         </DialogContent>
-        <DialogActions>
-                  <Button variant="contained" autoFocus onClick={() => {
+              <DialogActions>
+                  {prop ==="Edit" ?  <Button variant="contained" autoFocus onClick={() => {
+                      handleClose()
+                      Editemployee(id)
+                  }}>
+                    Update
+                  </Button>
+                      :
+                      <Button variant="contained" autoFocus onClick={() => {
                       handleClose()
                       Addemployee()
                   }}>
-          {prop}
-          </Button>
+                    Add Employee
+                 </Button>}
+                  
         </DialogActions>
       </BootstrapDialog>
     </div>

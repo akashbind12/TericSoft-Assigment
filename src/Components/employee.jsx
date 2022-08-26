@@ -29,6 +29,8 @@ export const EmployeeTable = ({getdata,employee}) => {
     });
   }
 
+ 
+
 
   return (
       <div>
@@ -61,7 +63,7 @@ export const EmployeeTable = ({getdata,employee}) => {
                     )
                   })}</TableCell>
                   <TableCell align="center"><Button size="small" variant="contained" onClick={()=> handleDelete(row.id)} >Delete</Button></TableCell>
-                  <TableCell align="center"> <Modalcontainer prop={"Edit"} ></Modalcontainer></TableCell>
+                  <TableCell align="center"  > <Modalcontainer prop={"Edit"} id={row.id} getdata={getdata} ></Modalcontainer></TableCell>
                 </TableRow>
               ))}
             </TableBody>
